@@ -7,8 +7,8 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - ./data/conf:/conf
-      - ./data/work:/work
+      - ./data/conf:/opt/adguardhome/conf
+      - ./data/work:/opt/adguardhome/work
     ports:
       # DNS
       - 53:53
@@ -25,6 +25,7 @@ services:
       # - 5443:5443/tcp
       # - 5443:5443/udp
       # WebUI
+      - 80:80/tcp
+      - 443:443/tcp
       - 3000:3000/tcp
-      - 8080:8080/tcp
     restart: unless-stopped
