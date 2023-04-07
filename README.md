@@ -9,4 +9,11 @@ DOCKER_COMPOSE_VERSION="2.17.2"
 DOCKER_COMPOSE_ARCH="aarch64"
 sudo curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-linux-${DOCKER_COMPOSE_ARCH}" \
   -o /usr/bin/docker-compose
+  
+sudo iptables -F
+sudo iptables -X
+sudo iptables -P INPUT ACCEPT
+sudo iptables -P FORWARD ACCEPT
+sudo iptables -P OUTPUT ACCEPT
+sudo reboot
 ```
