@@ -40,3 +40,7 @@ host doubleclick.net
 # Excpect Result
 # > doubleclick.net has address 0.0.0.0
 ```
+
+```bash
+docker run -d --name influxdb -p 8086:8086 -v /data/db-influx:/var/lib/influxdb2 influxdb:alpine
+```
