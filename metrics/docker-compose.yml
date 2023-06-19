@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  db-influx:
+    image: influxdb:alpine
+    container_name: db-influxdb
+    environment:
+     - DOCKER_INFLUXDB_INIT_MODE=setup
+     - DOCKER_INFLUXDB_INIT_USERNAME=dvgamerr
+     - DOCKER_INFLUXDB_INIT_PASSWORD=dZu!8g&2A*k8tGs&yRHPfeAcpDXQeb^w
+     - DOCKER_INFLUXDB_INIT_ORG=touno-io
+    volumes:
+      - /data/db-influx:/var/lib/influxdb2
+    ports:
+       - 8086:8086
+    restart: always
+    networks:
+      - influxdb
+  tg-ping:
+    image: telegraf:alpine
+    container_name: tg-ping
+    command: --config http://db-influx:8086/api/v2/telegrafs/0b405e9b88f07000
+    environment:
+     - INFLUX_TOKEN=7XPQ7Dl6TYhV2YRUpV92agU4pDdh-wQbqXCJYxD6mCotGH3-Ij7h-lNy3b5uFwAqL-3oc0W2J5zCrmv2zG1qzA==
+    restart: unless-stopped
+    networks:
+      - influxdb
+  tg-internet:
+    image: telegraf:alpine
+    container_name: tg-internet
+    command: --config http://db-influx:8086/api/v2/telegrafs/0b405650875b5000
+    environment:
+     - INFLUX_TOKEN=7fTVHSqulUm_5GSCquGzw61lfbeIhuzopA9wLziEu3v6wKQKJGMkyYMHTRTTxI9XW3u_cNAkPyVJjtmwLTC0Yw==
+    restart: unless-stopped
+    networks:
+      - influxdb
+
+networks:
+  influxdb:
+    driver: bridge
