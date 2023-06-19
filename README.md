@@ -1,22 +1,20 @@
-# k3s.aide-pi
+# aide-pi
 
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
-
 
 ### Install docker & docker-compose
 ```bash
 nano /boot/cmdline.txt
 # cgroup_enable=memory swapaccount=1 cgroup_memory=1 cgroup_enable=cpuset
 ssh-keygen -t ed25519
-git clone git@github.com:dvgamerr/k3s.aide-pi.git aide
+git clone git@github.com:dvgamerr/k3s.aide.git aide
 DOCKER_COMPOSE_VERSION="2.17.2"
 DOCKER_COMPOSE_ARCH="aarch64"
 sudo curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-linux-${DOCKER_COMPOSE_ARCH}" \
   -o /usr/bin/docker-compose
 ```
-
 ### Disabled Firewall in RasPi
 ```bash
 sudo iptables -F
@@ -44,3 +42,4 @@ host doubleclick.net
 ```bash
 docker run -d --name influxdb -p 8086:8086 -v /data/db-influx:/var/lib/influxdb2 influxdb:alpine
 ```
+# aide-opc
